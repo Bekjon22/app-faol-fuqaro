@@ -23,7 +23,7 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 jwt:
-  secret-key: nimakerakshusuzjasndjandoasndasndiasndasndkasndkasdnsaldlaskdn
+  secret-key: nimakesadjahdjkashdjkashjaherhewkrhwerakshusuzjasndjandoasndasndiasndasndkasndkasdnsaldlaskdn
   expire:
     access_token: 604800000
     refresh_token: 1728000000
