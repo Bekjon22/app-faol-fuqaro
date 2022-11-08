@@ -1,0 +1,39 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/faol_fuqaro
+    username: postgres
+    password: 2211
+  jpa:
+    hibernate:
+      ddl-auto: update
+#              ddl-auto: create
+    show-sql: true
+    open-in-view: true
+    properties:
+        hibernate:
+          enable_lazy_load_no_trans: true
+  sql:
+    init:
+#      mode: always
+      mode: never
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+jwt:
+  secret-key: kasdmaskmdkaslmdklasmdklasmdklasbbbnbnbnbnbjasndjandoasndasndiasndasndkasndkasdnsaldlaskdn
+  expire:
+    access_token: 604800000
+    refresh_token: 1728000000
+
+verification-code:
+  expire-time: 10800000
+  limit: 5
+
+
+twilio:
+  account_sid: AC589862161b8d192a992c556b7a9ebd6f
+  auth_token: a2fbdc642226401b743cfcdde18e9beb
+  phone_number: +16294654158
