@@ -24,3 +24,16 @@ spring:
       max-request-size: 10MB
 jwt:
   secret-key: nimakerakshusuzjasndjandoasndasndiasndasndkasndkasdnsaldlaskdn
+  expire:
+    access_token: 604800000
+    refresh_token: 1728000000
+
+verification-code:
+    expire-time: 10800000
+    limit: 5
+
+
+twilio:
+    account_sid: AC589862161b8d192a992c556b7a9ebd6f
+    auth_token: a2fbdc642226401b743cfcdde18e9beb
+    phone_number: +16294654158
