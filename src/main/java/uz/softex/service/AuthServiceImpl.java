@@ -117,7 +117,7 @@ public class AuthServiceImpl implements AuthService {
         HttpEntity<?> entity = new HttpEntity<>(headers);
         ResponseEntity<PassportResponseDto> exchange;
         Optional<User> userOptional = userRepository.findByPhoneNumber(dto.getPhoneNumber());
-        if (userOptional.isEmpty()) {
+        if (!userOptional.isPresent()) {
             try {
                 exchange = restTemplate.exchange("https://api.online-mahalla.uz/api/v1/public/tax/passport?series=" + passportSeries + "&number=" + passportNumber + "&birth_date=" + dto.getBirthdate(), HttpMethod.GET, entity, PassportResponseDto.class);
 

@@ -14,6 +14,7 @@ import uz.softex.payload.ErrorData;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -24,7 +25,7 @@ public class ExceptionHelper {
     public ResponseEntity<?> exceptionHandler(RestException e) {
         return ResponseEntity
                 .status(e.getStatus())
-                .body(new ApiResult<>(false, List.of(new ErrorData(e.getMessage(), e.getStatus().value()))));
+                .body(new ApiResult<>(false, Collections.singletonList(new ErrorData(e.getMessage(), e.getStatus().value()))));
     }
 
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
