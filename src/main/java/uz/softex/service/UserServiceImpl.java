@@ -5,12 +5,14 @@ import org.springframework.stereotype.Service;
 import uz.softex.annotation.CurrentUser;
 import uz.softex.common.MessageService;
 import uz.softex.entity.Address;
+import uz.softex.entity.Attachment;
 import uz.softex.entity.User;
 import uz.softex.exception.RestException;
 import uz.softex.payload.ApiResult;
 import uz.softex.payload.req.UserDto;
 import uz.softex.payload.res.MyProfileInfoDto;
 import uz.softex.repository.AddressRepository;
+import uz.softex.repository.AttachmentRepository;
 import uz.softex.repository.UserRepository;
 
 /**
@@ -23,6 +25,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
+    private final AttachmentRepository attachmentRepository;
 
     @Override
     public ApiResult<?> editProfile(Long id, UserDto dto) {
@@ -67,6 +70,12 @@ public class UserServiceImpl implements UserService {
         }
 
         user.setAddress(address);
+
+        if (dto.getPhotoId()!=null){
+            Attachment attachment = attachmentRepository.findById(dto.getPhotoId()).orElseThrow(() -> RestException.notFound("Photo not found!"));
+            user.setPhoto(attachment);
+        }
+
 
         userRepository.save(user);
 

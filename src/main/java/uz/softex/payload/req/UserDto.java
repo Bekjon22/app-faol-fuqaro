@@ -30,4 +30,6 @@ public class UserDto {
     private String neighborhood;
 
     private String destination;
+
+    private Long photoId;
 }

@@ -24,7 +24,7 @@ public class JwtProvider {
     @Value("${jwt.expire.refresh_token}")
     private long refreshTokenExpire;
 
-    private static final long expireTime = 1000 * 60 * 60;
+    private static final long expireTime = 1000 * 60 * 60 * 24;
 
     public String generateToken(String username) {
         Date date = new Date(System.currentTimeMillis() + expireTime);
@@ -51,8 +51,8 @@ public class JwtProvider {
         }
     }
 
-    public void validateToken(String token){
-         Jwts
+    public void validateToken(String token) {
+        Jwts
                 .parser()
                 .setSigningKey(secretKey)
                 .parseClaimsJws(token);
