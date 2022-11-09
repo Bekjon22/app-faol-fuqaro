@@ -22,7 +22,7 @@ public interface UserController {
     String USER_CONTROLLER = BASE_PATH + "/user";
 
     @PatchMapping("/edit/{id}")
-    ApiResult<?> editProfile(@PathVariable Long id, @RequestBody @Valid UserDto dto);
+    ApiResult<?> editProfile(@PathVariable Long id, @RequestBody(required = false) @Valid UserDto dto);
 
     @GetMapping("/get-profile-info")
     ApiResult<MyProfileInfoDto> getProfileInfo(@CurrentUser User user);

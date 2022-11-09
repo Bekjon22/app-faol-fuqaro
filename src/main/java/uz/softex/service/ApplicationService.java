@@ -19,7 +19,7 @@ public interface ApplicationService {
 
     ApiResult<?> replyApplication(Long id, ReplyApplicationDto dto);
 
-    ApiResult<List<MyApplicationInfo>> getByCategoryApp(Long id, Status status);
+    ApiResult<List<MyApplicationInfo>> getByStatusApp(Long id, Status status);
 
     ApiResult<List<MyApplicationInfo>> getAll(Long userId);
 

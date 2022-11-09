@@ -2,6 +2,7 @@ package uz.softex.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
+import uz.softex.annotation.CurrentUser;
 import uz.softex.entity.User;
 import uz.softex.payload.ApiResult;
 import uz.softex.payload.req.UserDto;
@@ -23,6 +24,7 @@ public class UserControllerImpl implements UserController{
     public ApiResult<?> editProfile(Long id, UserDto dto) {
         return userService.editProfile(id,dto);
     }
+
 
     @Override
     public ApiResult<MyProfileInfoDto> getProfileInfo(User user) {

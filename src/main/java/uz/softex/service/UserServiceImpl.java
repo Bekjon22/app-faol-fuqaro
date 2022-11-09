@@ -2,6 +2,7 @@ package uz.softex.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import uz.softex.annotation.CurrentUser;
 import uz.softex.common.MessageService;
 import uz.softex.entity.Address;
 import uz.softex.entity.User;
@@ -80,6 +81,7 @@ public class UserServiceImpl implements UserService {
 
 
         MyProfileInfoDto myProfileInfoDto = new MyProfileInfoDto();
+        myProfileInfoDto.setUserId(user.getId());
         myProfileInfoDto.setFirstName(user.getFirstName());
         myProfileInfoDto.setLastName(user.getLastName());
         myProfileInfoDto.setPatronymic(user.getPatronymic());
@@ -94,4 +96,8 @@ public class UserServiceImpl implements UserService {
 
         return ApiResult.successResponse(myProfileInfoDto);
     }
+
+
+
+
 }

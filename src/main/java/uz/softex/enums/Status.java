@@ -5,7 +5,7 @@ package uz.softex.enums;
  * @since 29.10.2022
  */
 public enum Status {
-    RAD_ETILGAN,
-    OCHIQ,
-    YOPIQ
+    REJECTED,
+    OPEN,
+    CLOSED
 }

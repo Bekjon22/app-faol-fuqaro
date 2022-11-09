@@ -87,7 +87,7 @@ public class AuthServiceImpl implements AuthService {
         smsService.sendMessage(dto.getPhoneNumber(), verificationCode);
 
         verificationCodeRepository.save(new VerificationCode(dto.getPhoneNumber(), verificationCode));
-        return ApiResult.successResponse(MessageService.getMessage("SMS_SENT"));
+        return ApiResult.successResponse(verificationCode,MessageService.getMessage("SMS_SENT"));
     }
 
     @Override

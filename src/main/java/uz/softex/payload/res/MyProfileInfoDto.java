@@ -18,6 +18,7 @@ import java.sql.Date;
 @AllArgsConstructor
 public class MyProfileInfoDto {
 
+    private Long UserId;
     private String firstName;
     private String lastName;
     private String patronymic;

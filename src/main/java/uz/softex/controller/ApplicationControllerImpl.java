@@ -33,8 +33,8 @@ public class ApplicationControllerImpl implements ApplicationController{
     }
 
     @Override
-    public ApiResult<List<MyApplicationInfo>> getByCategoryApp(Long id, Status status) {
-        return applicationService.getByCategoryApp(id,status);
+    public ApiResult<List<MyApplicationInfo>> getByStatusApp(Long id, Status status) {
+        return applicationService.getByStatusApp(id,status);
     }
 
     @Override

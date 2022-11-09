@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.softex.payload.ApiResult;
 import uz.softex.payload.req.CategoryReqDto;
 import uz.softex.payload.req.CategoryDto;
+import uz.softex.payload.res.CategoryResDto;
 import uz.softex.payload.res.ParentCategoryDto;
 
 import javax.validation.Valid;
@@ -32,7 +33,7 @@ public interface CategoryController {
     ApiResult<?> delete(@PathVariable Long id);
 
     @GetMapping("/{id}")
-    ApiResult<?>get(@PathVariable Long id);
+    ApiResult<CategoryResDto>getOne(@PathVariable Long id);
 
     @GetMapping("/get-parent")
     ApiResult<List<ParentCategoryDto>>getParent();

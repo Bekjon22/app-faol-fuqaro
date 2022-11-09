@@ -9,6 +9,7 @@ import uz.softex.mapper.CategoryMapper;
 import uz.softex.payload.ApiResult;
 import uz.softex.payload.req.CategoryReqDto;
 import uz.softex.payload.req.CategoryDto;
+import uz.softex.payload.res.CategoryResDto;
 import uz.softex.payload.res.ParentCategoryDto;
 import uz.softex.repository.CategoryRepository;
 
@@ -62,10 +63,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ApiResult<?> get(Long id) {
+    public ApiResult<CategoryResDto> get(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(() -> RestException.notFound(MessageService.getMessage("CATEGORY_NOT_FOUND")));
+        CategoryResDto categoryResDto = new CategoryResDto();
+        categoryResDto.setId(category.getId());
+        categoryResDto.setName(category.getName());
+        if (category.getParentCategory()!=null){
+            categoryResDto.setParentCategoryId(category.getParentCategory().getId());
+        }
 
-        return ApiResult.successResponse("done");
+        return ApiResult.successResponse(categoryResDto);
     }
 
     @Override
@@ -102,6 +109,7 @@ public class CategoryServiceImpl implements CategoryService {
         List<ParentCategoryDto> parentCategoryDtos = new ArrayList<>();
         for (Category category : categories) {
             ParentCategoryDto parentCategoryDto = new ParentCategoryDto();
+            parentCategoryDto.setCategoryId(category.getId());
             parentCategoryDto.setName(category.getName());
             parentCategoryDtos.add(parentCategoryDto);
         }

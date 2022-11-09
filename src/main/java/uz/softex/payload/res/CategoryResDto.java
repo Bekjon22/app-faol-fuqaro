@@ -5,12 +5,16 @@ import lombok.Setter;
 
 /**
  * @author Bekjon Bakhromov
- * @since 04.11.2022
+ * @since 09.11.2022
  */
 @Getter
 @Setter
-public class ParentCategoryDto {
-    private Long CategoryId;
+public class CategoryResDto {
+
+    private Long id;
 
     private String name;
+
+    private Long parentCategoryId = null;
+
 }

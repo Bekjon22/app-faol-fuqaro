@@ -61,7 +61,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         application.setPhotoIds(attachments);
         application.setText(dto.getText());
         application.setDestination(dto.getDestination());
-        application.setStatus(Status.OCHIQ);
+        application.setStatus(Status.OPEN);
         application.setUser(user);
         application.setCategory(category);
         applicationRepository.save(application);
@@ -92,7 +92,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
-    public ApiResult<List<MyApplicationInfo>> getByCategoryApp(Long id,Status status) {
+    public ApiResult<List<MyApplicationInfo>> getByStatusApp(Long id,Status status) {
 
         List<MyApplicationInfoProjection> myAppByStatus = applicationRepository.getApplicationByStatus(id,status);
 
@@ -144,7 +144,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         myApplicationFullInfo.setDestination(application.getDestination());
         myApplicationFullInfo.setStatus(application.getStatus());
         myApplicationFullInfo.setSubmittedDate(application.getCreatedAt());
-        if (application.getStatus()!=Status.OCHIQ){
+        if (application.getStatus()!=Status.OPEN){
             myApplicationFullInfo.setPosition(application.getPosition());
             myApplicationFullInfo.setPerformerName(application.getPerformerName());
             myApplicationFullInfo.setResultDate(application.getResultDate());

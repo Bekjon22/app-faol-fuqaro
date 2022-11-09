@@ -1,5 +1,6 @@
 package uz.softex.service;
 
+import uz.softex.annotation.CurrentUser;
 import uz.softex.entity.User;
 import uz.softex.payload.ApiResult;
 import uz.softex.payload.req.UserDto;
@@ -14,4 +15,5 @@ public interface UserService {
     ApiResult<?> editProfile(Long id,UserDto dto);
 
     ApiResult<MyProfileInfoDto> getProfileInfo(User user);
+
 }
