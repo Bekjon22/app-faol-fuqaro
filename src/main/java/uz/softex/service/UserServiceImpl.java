@@ -102,6 +102,7 @@ public class UserServiceImpl implements UserService {
         myProfileInfoDto.setDistrict(user.getAddress().getDistrict());
         myProfileInfoDto.setDestination(user.getAddress().getDestination());
         myProfileInfoDto.setNeighborhood(user.getAddress().getNeighborhood());
+        myProfileInfoDto.setAddressId(user.getAddress().getId());
 
         return ApiResult.successResponse(myProfileInfoDto);
     }
