@@ -30,8 +30,8 @@ public interface ApplicationController {
     ApiResult<?> replyApplication(@PathVariable(name = "id") Long id,
                                   @RequestBody @Valid ReplyApplicationDto dto);
 
-    @GetMapping("/get-by-status/{id}")
-    ApiResult<List<MyApplicationInfo>> getByStatusApp(@PathVariable(name = "id") Long userId, @RequestParam(name = "status") Status status);
+    @GetMapping("/get-by-status/{userId}")
+    ApiResult<List<MyApplicationInfo>> getByStatusApp(@PathVariable(name = "userId") Long userId, @RequestParam(name = "status") Status status);
 
     @GetMapping("/get-all/{id}")
     ApiResult<List<MyApplicationInfo>> getAll(@PathVariable(name = "id") Long userId);

@@ -22,7 +22,7 @@ public class VerificationCode extends AbsEntity {
     private String phoneNumber;
     private String verificationCode;
     private boolean used = false;
-    private Timestamp expireTime = new Timestamp(System.currentTimeMillis() + ((1000 * 60) * 3));
+    private Timestamp expireTime = new Timestamp(System.currentTimeMillis() + 1000 * 60);
 
     public VerificationCode(String phoneNumber, String verificationCode) {
         this.phoneNumber = phoneNumber;
