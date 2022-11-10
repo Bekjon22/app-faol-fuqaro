@@ -14,14 +14,14 @@ import java.util.List;
  */
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
 
-    @Query(value = "select c.name as category_name, a.status as status_name " +
+    @Query(value = "select c.id as application_id,c.name as category_name, a.status as status_name " +
             "from application a " +
             "INNER JOIN categories c on c.id = a.category.id " +
             "where a.user.id =:userId and a.status =:status")
     List<MyApplicationInfoProjection> getApplicationByStatus(Long userId, Status status);
 
 
-    @Query(value = "select c.name as category_name, a.status as status_name " +
+    @Query(value = "select c.id as application_id, c.name as category_name, a.status as status_name " +
             "from application a " +
             "INNER JOIN categories c on c.id = a.category.id " +
             "where a.user.id =:userId")

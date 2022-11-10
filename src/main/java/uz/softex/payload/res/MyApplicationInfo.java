@@ -8,6 +8,8 @@ import uz.softex.enums.Status;
 @Setter
 public class MyApplicationInfo {
 
+    private Long applicationId;
+
     private String categoryName;
 
     private Status statusName;

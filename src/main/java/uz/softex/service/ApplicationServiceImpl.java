@@ -104,6 +104,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         MyApplicationInfo myApplicationInfo = new MyApplicationInfo();
 
         for (MyApplicationInfoProjection myApplicationInfoProjection : myAppByStatus) {
+            myApplicationInfo.setApplicationId(myApplicationInfoProjection.getApplication_id());
             myApplicationInfo.setCategoryName(myApplicationInfoProjection.getCategory_name());
             myApplicationInfo.setStatusName(myApplicationInfoProjection.getStatus_name());
             myApplicationInfoList.add(myApplicationInfo);
@@ -124,6 +125,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         MyApplicationInfo myApplicationInfo = new MyApplicationInfo();
 
         for (MyApplicationInfoProjection myApplicationInfoProjection : allApplication) {
+            myApplicationInfo.setApplicationId(myApplicationInfoProjection.getApplication_id());
             myApplicationInfo.setCategoryName(myApplicationInfoProjection.getCategory_name());
             myApplicationInfo.setStatusName(myApplicationInfoProjection.getStatus_name());
             myApplicationInfoList.add(myApplicationInfo);
