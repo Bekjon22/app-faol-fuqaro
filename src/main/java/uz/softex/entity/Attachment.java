@@ -7,6 +7,7 @@ import uz.softex.entity.templete.AbsEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -31,4 +32,7 @@ public class Attachment extends AbsEntity {
 
     @Column(name = "size", nullable = false)
     private Long size;
+
+    @ManyToOne
+    private Application application;
 }

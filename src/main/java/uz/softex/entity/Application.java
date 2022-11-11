@@ -50,7 +50,7 @@ public class Application extends AbsEntity {
 
     private Timestamp resultDate;
 
-    @OneToMany
+    @OneToMany(mappedBy = "application")
     private List<Attachment> replyPhotoIds;
 
 
