@@ -1,13 +1,17 @@
 package uz.softex.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import uz.softex.payload.RegionDto;
 import uz.softex.payload.req.AddressDto;
 import uz.softex.payload.ApiResult;
+import uz.softex.payload.res.DistrictResDto;
+import uz.softex.payload.res.NeighborhoodResDto;
+import uz.softex.payload.res.RegionResDto;
+import uz.softex.payload.res.StreetResDto;
 
 import javax.validation.Valid;
+
+import java.util.List;
 
 import static uz.softex.utils.AppConstant.BASE_PATH;
 
@@ -19,8 +23,18 @@ import static uz.softex.utils.AppConstant.BASE_PATH;
 public interface AddressController {
     String ADDRESS_CONTROLLER = BASE_PATH + "/address";
 
-    @PostMapping ("/add")
-    ApiResult<?> add(@RequestBody @Valid AddressDto dto);
+    @GetMapping("/region")
+    ApiResult<List<RegionResDto>> getRegions();
+
+    @GetMapping("/district")
+    ApiResult<List<DistrictResDto>> getDistricts(@RequestParam(name = "regionId") Long regionId);
+
+    @GetMapping("/neighborhood")
+    ApiResult<List<NeighborhoodResDto>> getNeighborhood(@RequestParam(name = "districtId") Long districtId);
+
+      @GetMapping("/street")
+    ApiResult<List<StreetResDto>> getStreet(@RequestParam(name = "neighborhoodId") Long neighborhoodId);
+
 
 
 }
