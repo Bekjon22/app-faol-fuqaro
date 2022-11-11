@@ -7,28 +7,22 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import uz.softex.common.MessageService;
-import uz.softex.entity.Address;
-import uz.softex.entity.Role;
-import uz.softex.entity.User;
-import uz.softex.entity.VerificationCode;
+import uz.softex.entity.*;
 import uz.softex.enums.RoleEnum;
 import uz.softex.exception.RestException;
 import uz.softex.payload.ApiResult;
 import uz.softex.payload.PassportResponseDto;
+import uz.softex.payload.RegionDto;
 import uz.softex.payload.req.IdentityDto;
 import uz.softex.payload.req.PhoneNumberReqDto;
 import uz.softex.payload.req.PhoneVerifyReqDto;
-import uz.softex.repository.AddressRepository;
-import uz.softex.repository.RoleRepository;
-import uz.softex.repository.UserRepository;
-import uz.softex.repository.VerificationCodeRepository;
+import uz.softex.repository.*;
 import uz.softex.security.JwtProvider;
 
 import java.sql.Date;
@@ -55,6 +49,10 @@ public class AuthServiceImpl implements AuthService {
     private final RestTemplate restTemplate;
     private final AddressRepository addressRepository;
     private final RoleRepository roleRepository;
+    private final RegionRepository regionRepository;
+    private final DistrictRepository districtRepository;
+    private final NeighborhoodRepository neighborhoodRepository;
+    private final StreetRepository streetRepository;
 
     @Autowired
     JwtProvider jwtProvider;
@@ -156,6 +154,29 @@ public class AuthServiceImpl implements AuthService {
         return ApiResult.successResponse("successfully verified info");
 
 
+    }
+
+    @Override
+    public ApiResult<?> test() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+//        HttpEntity<?> entity = new HttpEntity<>(headers);
+
+        RegionDto[] forObject;
+
+            try {
+                 forObject = restTemplate.getForObject("https://fuqaro.softex.uz/api/secret/streets", RegionDto[].class);
+
+            } catch (Exception e) {
+                throw RestException.restThrow("WRONG_INFO", HttpStatus.BAD_REQUEST);
+            }
+
+
+
+
+        return ApiResult.successResponse("done!");
     }
 
     public String generateCode() {

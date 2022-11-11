@@ -16,4 +16,7 @@ public interface AuthService extends UserDetailsService {
     ApiResult<?> verifyCode(PhoneVerifyReqDto dto);
 
     ApiResult<?> verifyIdentity(IdentityDto dto);
+
+    ApiResult<?> test();
+
 }

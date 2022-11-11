@@ -23,28 +23,14 @@ import static uz.softex.utils.AppConstant.BASE_PATH;
 public interface CategoryController {
     String CATEGORY_CONTROLLER = BASE_PATH + "/category";
 
-    @PostMapping("/add")
-    ApiResult<?> addCategory(@RequestBody @Valid CategoryDto dto);
 
-    @PutMapping("/{id}")
-    ApiResult<?> edit(@RequestBody @Valid CategoryReqDto categoryDto, @PathVariable Long id);
-
-    @DeleteMapping("/delete/{id}")
-    ApiResult<?> delete(@PathVariable Long id);
 
     @GetMapping("/{id}")
     ApiResult<CategoryResDto>getOne(@PathVariable Long id);
 
-    @GetMapping("/get-parent")
-    ApiResult<List<ParentCategoryDto>>getParent();
 
-
-    @GetMapping("/get-all")
-    ApiResult<List<ParentCategoryDto>>getAll();
-
-
-    @GetMapping("/get-sub/{id}")
-    ApiResult<List<ParentCategoryDto>>getSub(@PathVariable(name = "id") Long parentCategoryId);
+    @GetMapping("/view")
+    ApiResult<?>getSub(@RequestParam(name = "id",required = false) Long parentCategoryId);
 
 
 

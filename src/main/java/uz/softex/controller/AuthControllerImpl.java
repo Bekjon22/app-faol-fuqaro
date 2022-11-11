@@ -31,4 +31,9 @@ public class AuthControllerImpl implements AuthController {
     public ApiResult<?> verifyIdentity(IdentityDto dto) {
         return authService.verifyIdentity(dto);
     }
+
+    @Override
+    public ApiResult<?> test() {
+        return authService.test();
+    }
 }

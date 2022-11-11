@@ -9,6 +9,7 @@ import org.hibernate.annotations.Where;
 import uz.softex.entity.templete.AbsEntity;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author Bekjon Bakhromov
@@ -26,8 +27,12 @@ public class Category extends AbsEntity {
     @Column(nullable = false,unique = true)
     private String name;
 
+    @OneToMany(mappedBy = "parentCategory")
+    private List<Category> childCategories;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_category_id")
     private Category parentCategory;
+
 
 }

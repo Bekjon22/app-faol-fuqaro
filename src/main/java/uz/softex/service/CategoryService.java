@@ -14,17 +14,8 @@ import java.util.List;
  */
 public interface CategoryService {
 
-    ApiResult<?> add(CategoryDto dto);
-
-    ApiResult<?> edit(CategoryReqDto categoryDto, Long id);
-
-    ApiResult<?> delete(Long id);
-
     ApiResult<CategoryResDto> get(Long id);
 
-    ApiResult<List<ParentCategoryDto>> getParent();
 
-    ApiResult<List<ParentCategoryDto>> getAll();
-
-    ApiResult<List<ParentCategoryDto>> getSub(Long parentCategoryId);
+    ApiResult<?> getSub(Long parentCategoryId);
 }
