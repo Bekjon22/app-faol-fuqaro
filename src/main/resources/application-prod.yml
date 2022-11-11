@@ -7,8 +7,8 @@ spring:
     password: 79e178f35f1efdf49a1902d895ad6bfad885f75666fb68a8362526bef87abd9b
   jpa:
     hibernate:
-#      ddl-auto: update
-              ddl-auto: create
+      ddl-auto: update
+#              ddl-auto: create
     show-sql: true
     open-in-view: true
     properties:
@@ -16,8 +16,8 @@ spring:
           enable_lazy_load_no_trans: true
   sql:
     init:
-      mode: always
-#      mode: never
+#      mode: always
+      mode: never
   servlet:
     multipart:
       max-file-size: 10MB
