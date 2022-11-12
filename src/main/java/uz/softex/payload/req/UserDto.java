@@ -23,13 +23,13 @@ public class UserDto {
 
     private Date birthdate;
 
-    private String region;
+    private Long regionId;
 
-    private String district;
+    private Long districtId;
 
-    private String neighborhood;
+    private Long neighborhoodId;
 
-    private String destination;
+    private Long streetId;
 
     private Long photoId;
 }

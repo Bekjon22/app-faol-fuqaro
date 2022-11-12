@@ -27,8 +27,8 @@ public class MyProfileInfoDto {
     private String region;
     private String district;
     private String neighborhood;
-    private String destination;
-    private Long addressId;
+    private String street;
+
 
 
 

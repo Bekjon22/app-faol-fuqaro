@@ -24,5 +24,9 @@ public class PassportDto {
 
     private String patronymic_name;
 
+    private Long region_id;
+
+    private Long district_id;
+
 
 }

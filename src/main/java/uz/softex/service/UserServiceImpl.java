@@ -4,16 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.softex.annotation.CurrentUser;
 import uz.softex.common.MessageService;
-import uz.softex.entity.Address;
-import uz.softex.entity.Attachment;
-import uz.softex.entity.User;
+import uz.softex.entity.*;
 import uz.softex.exception.RestException;
 import uz.softex.payload.ApiResult;
 import uz.softex.payload.req.UserDto;
 import uz.softex.payload.res.MyProfileInfoDto;
-import uz.softex.repository.AddressRepository;
-import uz.softex.repository.AttachmentRepository;
-import uz.softex.repository.UserRepository;
+import uz.softex.repository.*;
 
 /**
  * @author Bekjon Bakhromov
@@ -26,6 +22,10 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
     private final AttachmentRepository attachmentRepository;
+    private final RegionRepository regionRepository;
+    private final DistrictRepository districtRepository;
+    private final NeighborhoodRepository neighborhoodRepository;
+    private final StreetRepository streetRepository;
 
     @Override
     public ApiResult<?> editProfile(Long id, UserDto dto) {
@@ -51,27 +51,30 @@ public class UserServiceImpl implements UserService {
             user.setBirthdate(dto.getBirthdate());
         }
 
-
-        Address address = addressRepository.findByUserId(id);
-        if (dto.getRegion() != null) {
-            address.setRegion(dto.getRegion());
+        if (dto.getRegionId() != null) {
+            Region region = regionRepository.findById(dto.getRegionId()).orElseThrow(() -> RestException.notFound("Region not found"));
+            user.setRegion(region);
         }
 
-        if (dto.getDistrict() != null) {
-            address.setDistrict(dto.getDistrict());
+        if (dto.getDistrictId() != null) {
+            District district = districtRepository.findById(dto.getDistrictId()).orElseThrow(() -> RestException.notFound("District not found"));
+            user.setDistrict(district);
         }
 
-        if (dto.getDestination() != null) {
-            address.setDestination(dto.getDestination());
+        if (dto.getNeighborhoodId() != null) {
+            Neighborhood neighborhood = neighborhoodRepository.findById(dto.getNeighborhoodId()).orElseThrow(() -> RestException.notFound("Neighborhood not found"));
+            user.setNeighborhood(neighborhood);
         }
 
-        if (dto.getNeighborhood() != null) {
-            address.setNeighborhood(dto.getNeighborhood());
+        if (dto.getStreetId() != null) {
+            Street street = streetRepository.findById(dto.getStreetId()).orElseThrow(() -> RestException.notFound("Neighborhood not found"));
+            user.setStreet(street);
         }
 
-        user.setAddress(address);
 
-        if (dto.getPhotoId()!=null){
+//        user.setAddress(address);
+
+        if (dto.getPhotoId() != null) {
             Attachment attachment = attachmentRepository.findById(dto.getPhotoId()).orElseThrow(() -> RestException.notFound("Photo not found!"));
             user.setPhoto(attachment);
         }
@@ -88,7 +91,6 @@ public class UserServiceImpl implements UserService {
 //                RestException.notFound(MessageService.getMessage("USER_NOT_FOUND")));
 
 
-
         MyProfileInfoDto myProfileInfoDto = new MyProfileInfoDto();
         myProfileInfoDto.setUserId(user.getId());
         myProfileInfoDto.setFirstName(user.getFirstName());
@@ -98,16 +100,19 @@ public class UserServiceImpl implements UserService {
         myProfileInfoDto.setPassportInfo(user.getPassportSeries());
         myProfileInfoDto.setBirthdate(user.getBirthdate());
 
-        myProfileInfoDto.setRegion(user.getAddress().getRegion());
-        myProfileInfoDto.setDistrict(user.getAddress().getDistrict());
-        myProfileInfoDto.setDestination(user.getAddress().getDestination());
-        myProfileInfoDto.setNeighborhood(user.getAddress().getNeighborhood());
-        myProfileInfoDto.setAddressId(user.getAddress().getId());
+        myProfileInfoDto.setRegion(user.getRegion().getName());
+        myProfileInfoDto.setDistrict(user.getDistrict().getName());
+
+        if (user.getNeighborhood()!=null){
+            myProfileInfoDto.setNeighborhood(user.getNeighborhood().getName());
+        }
+
+        if (user.getStreet()!=null){
+            myProfileInfoDto.setStreet(user.getStreet().getName());
+        }
 
         return ApiResult.successResponse(myProfileInfoDto);
     }
-
-
 
 
 }

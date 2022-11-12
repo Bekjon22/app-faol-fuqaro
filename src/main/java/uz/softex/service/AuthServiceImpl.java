@@ -123,18 +123,26 @@ public class AuthServiceImpl implements AuthService {
                 throw RestException.restThrow(MessageService.getMessage("WRONG_PASSPORT_INFO"), HttpStatus.BAD_REQUEST);
             }
 
-            String[] region = Objects.requireNonNull(exchange.getBody()).getData().getInfo().getData().getGiven_place().split(" ", 2);
-            String[] district = Objects.requireNonNull(exchange.getBody()).getData().getInfo().getData().getBirth_place().split(" ", 2);
+//            String[] region = Objects.requireNonNull(exchange.getBody()).getData().getInfo().getData().getGiven_place().split(" ", 2);
+//            String[] district = Objects.requireNonNull(exchange.getBody()).getData().getInfo().getData().getBirth_place().split(" ", 2);
+//
+//            Address address = new Address();
 
-            Address address = new Address();
-            address.setRegion(region[0]);
-            address.setDistrict(district[0]);
-            address.setDestination(Objects.requireNonNull(exchange.getBody()).getData().getInfo().getData().getAddress());
 
-            Address savedAddress = addressRepository.save(address);
+            Region region1 = regionRepository.findById(Objects.requireNonNull(exchange.getBody()).getData().getPassport().getRegion_id()).orElseThrow(() -> RestException.notFound("region not found"));
+            District district = districtRepository.findById(Objects.requireNonNull(exchange.getBody().getData().getPassport().getDistrict_id())).orElseThrow(() -> RestException.notFound("district not found"));
+
+
+//            address.setRegion(region[0]);
+//            address.setDistrict(district[0]);
+//            address.setDestination(Objects.requireNonNull(exchange.getBody()).getData().getInfo().getData().getAddress());
+
+//            Address savedAddress = addressRepository.save(address);
             Role role = roleRepository.findByType(RoleEnum.ROLE_USER).orElseThrow(() -> RestException.notFound(MessageService.getMessage("ROLE_NOT_FOUND")));
 
             User user = new User();
+            user.setRegion(region1);
+            user.setDistrict(district);
             user.setFirstName(Objects.requireNonNull(exchange.getBody()).getData().getPassport().getName());
             user.setLastName(exchange.getBody().getData().getPassport().getSur_name());
             user.setBirthdate(Date.valueOf(exchange.getBody().getData().getPassport().getBirth_date()));
@@ -142,7 +150,7 @@ public class AuthServiceImpl implements AuthService {
             user.setPatronymic(exchange.getBody().getData().getPassport().getPatronymic_name());
             user.setPassword(dto.getPassportNumber());
             user.setPhoneNumber(dto.getPhoneNumber());
-            user.setAddress(savedAddress);
+//            user.setAddress(savedAddress);
             user.setPassword(passwordEncoder.encode("123"));
             user.setEnabled(true);
             user.setRole(role);

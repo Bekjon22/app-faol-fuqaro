@@ -48,9 +48,23 @@ public class User extends AbsEntity implements UserDetails {
     @ManyToOne(fetch = FetchType.LAZY)
     private Attachment photo;
 
+//    @ManyToOne
+//    @JoinColumn(name = "address_id")
+//    private Address address;
+
     @ManyToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
+    private Region region;
+
+    @ManyToOne
+    private District district;
+
+    @ManyToOne
+    private Neighborhood neighborhood;
+
+    @ManyToOne
+    private Street street;
+
+
 
     @Column(name = "is_account_non_expired")
     private boolean isAccountNonExpired = true;
